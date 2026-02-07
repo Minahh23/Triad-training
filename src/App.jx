@@ -9,7 +9,7 @@ function App() {
   const [adminStep, setAdminStep] = useState(1);
   const [otpInput, setOtpInput] = useState('');
   const [generatedOtp, setGeneratedOtp] = useState(null);
-  const [masterPhone, setMasterPhone] = useState('+261383905912');
+  const [masterPhone, setMasterPhone] = useState(import.meta.env.VITE_MASTER_PHONE);
   const [error, setError] = useState('');
   const [showSettings, setShowSettings] = useState(false);
 
