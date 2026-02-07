@@ -2,6 +2,113 @@ import React, { useState, useEffect } from 'react';
 import { Users, TrendingUp, Shield, LogOut, Settings, CheckCircle } from 'lucide-react';
 
 const DB_KEY = "triad_sovereign_storage_v10";
+const StudentPortal = ({ user }) => {
+  const [goal, setGoal] = useState('Bodybuilding'); 
+
+  // EXPERT REPOSITORY: Real exercise sets based on fitness science
+  const trainingLibrary = {
+    "Bodybuilding": [
+      { name: "Hypertrophy: Chest/Triceps", duration: "65 min", sets: "4x12", intensity: "High" },
+      { name: "Back/Biceps Volume", duration: "55 min", sets: "3x15", intensity: "Medium" },
+      { name: "Leg Day (Quads Focus)", duration: "70 min", sets: "5x10", intensity: "Max" }
+    ],
+    "Strengthening": [
+      { name: "Deadlift Fundamentals", duration: "45 min", sets: "5x5", intensity: "Max" },
+      { name: "Overhead Press Stability", duration: "40 min", sets: "5x5", intensity: "High" },
+      { name: "Core Kinetic Chain", duration: "30 min", sets: "3x20", intensity: "Medium" }
+    ],
+    "Weight Loss": [
+      { name: "HIIT: Tabata Sprints", duration: "25 min", sets: "8 Rounds", intensity: "Max" },
+      { name: "Full Body Metabolic Blast", duration: "45 min", sets: "Circuit", intensity: "High" },
+      { name: "Active Recovery Flow", duration: "30 min", sets: "Steady", intensity: "Low" }
+    ]
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-6 pb-24">
+      <header className="flex justify-between items-start mb-8">
+        <div>
+          <h1 className="text-2xl font-black italic tracking-tighter">TRIAD PERFORMANCE</h1>
+          <p className="text-slate-500 text-xs font-bold uppercase">Sovereign ID: {user?.name.substring(0,5)}-2026</p>
+        </div>
+        <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👤</div>
+      </header>
+
+      {/* PROGRESSION TO TARGET SECTION */}
+      <section className="mb-8">
+        <h3 className="text-[10px] font-black text-slate-400 mb-3 tracking-widest uppercase">Progression to Target</h3>
+        <div className="bg-white p-6 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+          <div className="flex justify-between items-center mb-4">
+            <select 
+              value={goal} 
+              onChange={(e) => setGoal(e.target.value)}
+              className="bg-slate-100 border-none rounded-xl px-3 py-1 text-xs font-bold text-indigo-600 focus:ring-0"
+            >
+              <option>Bodybuilding</option>
+              <option>Strengthening</option>
+              <option>Weight Loss</option>
+            </select>
+            <span className="text-2xl font-black italic text-indigo-600">72%</span>
+          </div>
+          <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+            <div className="bg-indigo-600 h-full rounded-full transition-all duration-1000" style={{width: '72%'}}></div>
+          </div>
+        </div>
+      </section>
+
+      {/* EXERCISE TRAINING SECTION */}
+      <section className="mb-8">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase">Exercise Training</h3>
+          <span className="text-[10px] font-bold text-indigo-500">Duration Section ⏱️</span>
+        </div>
+        <div className="space-y-3">
+          {trainingLibrary[goal].map((ex, i) => (
+            <div key={i} className="bg-white p-5 rounded-3xl flex justify-between items-center border border-slate-50 group active:scale-95 transition-all">
+              <div className="flex gap-4 items-center">
+                <div className="w-10 h-10 bg-slate-50 rounded-2xl flex items-center justify-center text-indigo-600 font-bold">{i+1}</div>
+                <div>
+                  <p className="font-bold text-slate-800 text-sm">{ex.name}</p>
+                  <p className="text-[10px] text-slate-400 font-medium">{ex.duration} • {ex.sets} • {ex.intensity} Intensity</p>
+                </div>
+              </div>
+              <div className="w-6 h-6 rounded-full border-2 border-slate-100 flex items-center justify-center text-[10px]">✓</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* STATS & AI CONCLUSION */}
+      <section>
+        <h3 className="text-[10px] font-black text-slate-400 mb-3 tracking-widest uppercase">AI Conclusion & Stats</h3>
+        <div className="bg-indigo-900 p-6 rounded-[2.5rem] text-white shadow-lg shadow-indigo-200">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="animate-pulse">🤖</span>
+            <p className="text-[10px] font-bold tracking-widest opacity-60 uppercase">System Analysis</p>
+          </div>
+          <p className="text-sm leading-relaxed font-medium opacity-90 italic">
+            "Based on your 72% {goal} completion, your metabolic rate has increased by 14%. 
+            Recommendation: Prioritize the 'Kinetic Chain' session tomorrow to prevent CNS fatigue."
+          </p>
+          <div className="mt-6 pt-6 border-t border-white/10 flex justify-between">
+            <div className="text-center">
+              <p className="text-[10px] opacity-50 uppercase">Power</p>
+              <p className="font-bold text-lg">8.4</p>
+            </div>
+            <div className="text-center">
+              <p className="text-[10px] opacity-50 uppercase">Stamina</p>
+              <p className="font-bold text-lg">9.1</p>
+            </div>
+            <div className="text-center">
+              <p className="text-[10px] opacity-50 uppercase">Recov</p>
+              <p className="font-bold text-lg">6.2</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default function App() {
   const [view, setView] = useState('auth'); 
