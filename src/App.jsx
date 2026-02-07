@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const DB_KEY = "triad_sovereign_storage_v10";
 
@@ -53,6 +54,7 @@ function App() {
 
   if (view === 'auth') {
     return (
+      <>
       <div className="min-h-screen flex flex-col justify-center p-8 max-w-md mx-auto font-inter">
         <div className="text-center mb-10">
           <div className={`w-20 h-20 mx-auto rounded-[2rem] flex items-center justify-center text-white shadow-2xl mb-6 font-black italic text-3xl transition-all ${authMode === 'admin-gate' ? 'bg-red-600 rotate-12' : 'bg-indigo-600 -rotate-6'}`}>T</div>
@@ -90,12 +92,15 @@ function App() {
           </div>
         )}
       </div>
+      <SpeedInsights />
+      </>
     );
   }
 
   if (view === 'admin-dashboard') {
     const coaches = data.users.filter(u => u.role === 'coach');
     return (
+      <>
       <div className="min-h-screen bg-[#050505] text-white pb-20 font-inter">
         <header className="p-6 border-b border-white/5 flex justify-between items-center bg-black/40 backdrop-blur-md sticky top-0 z-50">
           <div>
@@ -155,10 +160,16 @@ function App() {
           </div>
         </main>
       </div>
+      <SpeedInsights />
+      </>
     );
   }
 
-  return null;
+  return (
+    <>
+      <SpeedInsights />
+    </>
+  );
 }
 
 export default App;
